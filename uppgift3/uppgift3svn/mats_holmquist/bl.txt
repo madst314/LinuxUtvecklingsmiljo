@@ -1,0 +1,4 @@
+hello svn world
+rad 2
+Detta är en test
+rad 4 (fyra)

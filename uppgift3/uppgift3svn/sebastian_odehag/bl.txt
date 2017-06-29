@@ -1,0 +1,7 @@
+Hello svn world..
+<<<<<<< .mine
+”Ändring från SubersionTest2”
+=======
+Ändring från SubversionTest
+Ändring på ytterliggare rad från SubversionTest
+>>>>>>> .r437

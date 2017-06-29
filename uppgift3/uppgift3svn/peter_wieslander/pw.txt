@@ -1,0 +1,2 @@
+Hello svn world // edit from svn-copy // edit from initial svn copy
+// more edit from svn-copy // more edit from inital svn copy

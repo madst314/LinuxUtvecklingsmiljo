@@ -1,0 +1,5 @@
+Hello svn world
+Detta är rad nr 2 - ändring 1 och 3
+och här är ännu en rad - ändring 2
+rad nummer fyra kommer här - ändring 4
+och så fortsätter vi med ännu en rad

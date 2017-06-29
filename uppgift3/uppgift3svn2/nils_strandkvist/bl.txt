@@ -1,0 +1,7 @@
+11Hello svn world Ändrar på en annan rad än den andra.
+2Hello svn world
+Testar lägga till en rad från mitt andra förråd. (Bättre ändring)
+Här görs en bättre ändring
+Tillägg som ska vara kvar.
+Även här görs ett tillägg som ska vara kvar.
+Bra ändring

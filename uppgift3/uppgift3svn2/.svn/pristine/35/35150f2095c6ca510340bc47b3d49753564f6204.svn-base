@@ -1,0 +1,50 @@
+  
+  145  cd Lsum/O3/
+  147  sudo apt install subversion
+  148  svn co svn://130.239.163.12/labb4 . --username labb4
+  150  svn status
+  151  mkdir otto_tuvesson
+  152  svn status
+  153  cd otto_tuvesson/
+  154  echo "Hello you!" > hello.txt
+  155  svn status
+  156  svn log
+  157  cd ..
+  161  svn update
+  162  svn log
+  163  cd otto_tuvesson/
+  166  cd ..
+  167  svn add otto_tvuesson
+  168  svn commit -m "Lagt till min mapp"
+  169  svn log
+  170  svn status
+  171  gedit otto_tuvesson/hello.txt 
+  172  svn commit -m "Ändrat lite i filen"
+  173  svn diff -2437 hello.txt
+  174  svn diff -r 2437 hello.txt
+  175  cd otto_tuvesson/
+  176  svn diff -r 2437 hello.txt
+  177  cd ..
+  178  svn commit -m "Added me in users"
+  179  svn diff -r 2438 users.txt
+  180  svn update
+  181  svn diff -r 2438 users
+  183  cd ..
+  184  cd O32
+  185  svn co svn://130.239.163.12/labb4 . --username labb4
+  186  cd otto_tuvesson/
+  187  gedit hello.txt 
+  188  cd ..
+  189  cd O3
+  190  cd otto_tuvesson/
+  191  gedit hello.txt 
+  192  svn commit -m "Changed 'original' file"
+  193  cd ..
+  194  cd O32
+  195  cd otto_tuvesson/
+  196  svn commit -m "Changed 'alternative' file"
+  197  svn diff -r 2439
+  198  man svn'
+  199  man svn
+  200  svn update
+  201  history > history.txt

@@ -1,0 +1,5 @@
+Hello svn world I changed my first and second copy here.
+I added this in my first copy.
+I added this to the second copy.
+This is the one I want to keep.
+

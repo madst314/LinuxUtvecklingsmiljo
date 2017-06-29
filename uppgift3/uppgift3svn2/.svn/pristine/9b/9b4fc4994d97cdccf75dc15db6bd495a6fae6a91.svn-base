@@ -1,0 +1,9 @@
+Detta är en test fil:
+2 denna rad ska modifieras av instans 1
+3 denna rad ska modifieras av ins 2
+4 denna rad ska modifieras av instans 1 och ins 2
+
+# Ändring vänd på ins och instans
+# Test 1; Börja med ändring på skilda rader (2 och 3)
+# Test 2; Sedan ändring på rad 4
+

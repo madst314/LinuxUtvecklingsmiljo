@@ -1,0 +1,5 @@
+hej hej
+Hello svn world igen!
+Ny rad 3
+Ny konflikt kanske
+

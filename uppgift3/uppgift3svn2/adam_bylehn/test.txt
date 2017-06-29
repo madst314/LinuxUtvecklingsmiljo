@@ -1,0 +1,14 @@
+Nu skriver jag över första raden
+Adding a
+few lines
+to mu test file
+my*
+lägger till 
+några rader i 
+slutet
+Hello to the svn world!
+Adding a
+few lines
+to mu test file
+my*
+This is a new line

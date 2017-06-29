@@ -1,0 +1,5 @@
+a test file Added from lars_olle_arnesson
+A new line
+This file will be a temporary testfile for SVN.
+New lines will be added in this test.
+Fro reasons unknown.

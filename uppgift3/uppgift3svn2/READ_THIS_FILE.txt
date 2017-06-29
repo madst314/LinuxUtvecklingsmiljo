@@ -1,0 +1,139 @@
+PLEASE READ THIS FILE
+=====================
+
+This subversion repository is only used for the subversion assignment.
+The course other exercise and project versioning system is located in another repository.
+
+
+
+
+Directory structure
+===================
+
+
+
+As long as you use "view-commands" you are free to browse the whole
+repository, for example you could make your current working folder the top
+folder of the repository and then issue the 'log' command. This should
+result is something like this
+
+------------------------------------------------------------------------
+r4 | labb4 | 2013-02-15 14:55:50 +0100 (fre, 15 feb 2013) | 2 lines
+
+Björne har lagt till sig i users
+
+------------------------------------------------------------------------
+r3 | labb4 | 2013-02-15 11:51:23 +0100 (fre, 15 feb 2013) | 2 lines
+
+Lägger upp en till version
+
+------------------------------------------------------------------------
+r2 | labb4 | 2013-02-15 11:28:55 +0100 (fre, 15 feb 2013) | 2 lines
+
+Lagt till en ändring
+
+------------------------------------------------------------------------
+r1 | labb4 | 2013-02-15 11:24:14 +0100 (fre, 15 feb 2013) | 2 lines
+
+Lägger till testfil1.txt
+
+------------------------------------------------------------------------
+
+
+
+Here you can see that at the time of writing we are working on revision 4
+of the repository and that user labb4 have done all updates.
+
+But when you want to add files, make changes, etc in order to complete the
+subversion assignment please follow these simple rules. First create your
+own directory in the 'svn_assignment' folder and name it with your user
+name. For example my username is 'bjorne_lindberg' so I first created a folder and
+then added it to the repository, this be done in the following way.
+
+
+mkdir bjorne_lindberg
+echo "Hello svn world" > bjorne_lindberg/bl.txt
+svn add bjorne_lindberg
+svn commit -m "Lagt till en katalog med fil"
+
+Your folder has now been added to the subversion repository. You can now
+change your working directory to be your folder. You are now free to make
+all the changes and modificatios you want *INSIDE* your folder.
+
+For example, in my folder I have a file called 'temporary.txt' that I made
+a few changes to. I can check if there are some files in my directory that
+need to be added to the repository
+
+> svn status
+M      temporary.txt
+
+Yes, it looks like the 'temporary.txt' file has been changed, I better add
+it to the repository
+
+> svn commit -m "Made some minor changes to the temporary.txt file"
+Sending        bjorne_lindberg/temporary.txt
+Transmitting file data .
+Committed revision 5.
+
+If you now want to check the log of changes to what has happened in the
+directory you can once again use the 'log' command:
+
+>  svn log
+------------------------------------------------------------------------
+r6 | labb4 | 2008-04-15 08:30:19 +0200 (Tue, 15 Apr 2008) | 1 line
+
+Added folder structure for the repository
+------------------------------------------------------------------------
+
+Here you can note two things:
+
++       The current revision is 7 but the log command only shows revision 6. To
+        get the latest revision you need to issue an 'update' command before
+        the 'log' command.
+
++       Only the changes for this folder is listed
+
+If I first do the 'update' command I get another result:
+
+> svn update
+At revision 7.
+> svn log
+------------------------------------------------------------------------
+r7 | labb4 | 2008-04-15 08:44:55 +0200 (Tue, 15 Apr 2008) | 1 line
+
+Made some minor changes to the temporary.txt file
+------------------------------------------------------------------------
+r6 | labb4 | 2008-04-15 08:30:19 +0200 (Tue, 15 Apr 2008) | 1 line
+
+Added folder structure for the repository
+------------------------------------------------------------------------
+
+If I want to see exactly what changes to the file you can use the 'diff'
+command:
+
+> svn diff -r 6 temporary.txt
+Index: temporary.txt
+===================================================================
+--- temporary.txt       (revision 6)
++++ temporary.txt       (working copy)
+@@ -41,6 +41,10 @@
+ erat odio, dapibus ut, pretium eu, scelerisque eu, urna. Duis ac risus eget
+ eros convallis feugiat.
+ 
++Added a few lines
++just to see how this
++works
++
+ Integer quis felis id lorem consectetuer lobortis. Curabitur leo. Duis
+ vitae leo. Aliquam magna. Suspendisse arcu velit, interdum a, tincidunt
+ vel, nonummy a, magna. Quisque pede. Donec metus. Pellentesque auctor
+@@ -52,4 +56,5 @@
+ Vestibulum ornare, velit vel aliquam convallis, nunc massa tempus lectus,
+ sit amet molestie nulla urna ac nisi. Mauris lectus nulla, ullamcorper
+ luctus, consequat quis, feugiat sit amet, nibh. Suspendisse consectetuer
+-ligula in augue.
+\ No newline at end of file
++ligula in augue.
++
+
+Personally I find these diffs a bit difficult to read. Later in the course well we look at the syntax when we examine the utilities diff and patch

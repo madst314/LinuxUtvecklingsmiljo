@@ -1,0 +1,4 @@
+Added here a line before the Hellow rold stuff
+Hello svn world - workspace 2 for svn
+Hello svn world - workspace 1 for svn
+Added this line due to verify what happens when commiting changes made on a new line after the Hellow world text

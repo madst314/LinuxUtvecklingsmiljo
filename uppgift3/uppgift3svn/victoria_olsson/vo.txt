@@ -1,0 +1,3 @@
+Hello svn world
+Rad nr 2, i andra arbetskopian.
+Rad nr 3.

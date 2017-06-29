@@ -1,0 +1,5 @@
+Hello svn world
+Testar 2:a commit
+Testar en 3:e också för säkerhets skull
+Testing diff command
+Testar att skriva i sub1

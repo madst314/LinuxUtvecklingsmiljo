@@ -1,0 +1,2 @@
+Hello svn strange world
+Text for second commit

@@ -1,0 +1,6 @@
+A simple test issue
+<<<<<<< .mine
+A new line is added..
+=======
+A new line is added. So far so good!
+>>>>>>> .r366

@@ -1,0 +1,4 @@
+clone1 says hello
+clone1 says hello again
+clone2 says hello
+clone2 says hello again

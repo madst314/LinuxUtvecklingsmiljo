@@ -1,0 +1,11 @@
+<<<<<<< .mine
+Hello svreeeeeeeeeeeeeeeeeen 
+=======
+nnnn svn world
+>>>>>>> .r773
+lägger till en 2:a rad
+<<<<<<< .mine
+lägger till en rad ifrån första  repo-katalogen
+=======
+lägger till en rad ifrån andra repo-katalogerrrrrrrrrrrrrrrrrn
+>>>>>>> .r773

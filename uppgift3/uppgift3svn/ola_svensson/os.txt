@@ -1,0 +1,8 @@
+<<<<<<< .mine
+Hello svn world added this from subversion2
+
+added new line from folder subversion2
+=======
+Hello svn world added this from subversion folder
+added this line from subversion folder
+>>>>>>> .r854

@@ -1,0 +1,3 @@
+Testar svn lite grann... Ändrar första raden.
+Lägger till en andra rad. Nu ändrar jag lite till för att få det rätt.
+Och en tredje rad.

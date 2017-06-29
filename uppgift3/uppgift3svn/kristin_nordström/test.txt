@@ -1,0 +1,8 @@
+Hello svn world
+Lägger till en rad
+Lägger till ytterligare en rad
++ en till
+testar igen, ej kopia
+testar igen_Kopia
+Provar igen_EJ Kopia
+Provar igen_Kopia

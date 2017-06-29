@@ -1,0 +1,8 @@
+Its great fun to work with svn
+
+Here will be a conflict :-)
+
+
+
+
+And this will be merged wihtout a problm

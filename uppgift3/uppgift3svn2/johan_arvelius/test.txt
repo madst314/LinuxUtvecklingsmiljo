@@ -1,0 +1,2 @@
+Min testfil med lite text för att testa med.
+I den här filen lade ja till mer text och en punkt i raden ovan.

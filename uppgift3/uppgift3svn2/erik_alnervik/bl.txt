@@ -1,0 +1,2 @@
+Hello svn world (update from first repo) (update from second repo)
+Add new line add by first repo

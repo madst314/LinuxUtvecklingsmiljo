@@ -1,0 +1,18 @@
+#! /bin/bash
+# Hämta Exif.Photo.DateTimeOriginal-datum från en bildfil
+# Förutsätt att datum och tid sparas som '2011:01:08 23:28:15'
+
+# En bildfil måste anges
+if [ $# -ne 1 ] || ! [ -f $1 ] ; then
+  echo "Hämtar bildens originaldatum och -tid (Exif.Photo.DateTimeOriginal) från filer typ jpeg, tiff, med flera"
+  echo "Användning: "`basename $0`" <bildfilnamn>"
+	echo "Använder: exiv2"
+  exit 0
+fi
+
+exiv2 -pa $1 2>/dev/null | grep Exif.Photo.DateTimeOriginal | sed -e "s/^.\{60\}//" -e "s/[/:]/-/1" -e "s/[/:]/-/1"
+
+#Exempel på felmeddelande (därför 2>/dev/null ovan):
+#Warning: Directory Pentax, entry 0x0004: Data area exceeds data buffer, ignoring it.
+
+#2011-01-08 23:28:15

@@ -1,0 +1,2 @@
+﻿Hello svn world, changing. Which  will cause a conflict. 
+Adding a new row, which will not cause any conflicts

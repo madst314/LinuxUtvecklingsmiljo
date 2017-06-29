@@ -1,0 +1,5 @@
+Add new line from copy 2.
+Hello svn world!
+Add new line from copy 1.
+Add another line from copy 2.
+Add another line from copy 1.

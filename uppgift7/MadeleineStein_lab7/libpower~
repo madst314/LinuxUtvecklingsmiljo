@@ -1,0 +1,21 @@
+.\" Manpage for libPower
+.TH "18 Feb 2017" "1.0" "libpower man page"
+.SH NAME
+libpower \-  calculate power
+.SH SYNOPSIS
+libpower [USERNAME]
+.SH DESCRIPTION
+libpower is a library with C-implemented functions to calculate the power of a circuit. The provided functions are:
+
+(1) float calc_power_r(float volt, float resistance) 
+
+(2) float calc_power_i(float volt, float current)
+
+.SH OPTIONS
+libpower take voltage and the resistance or current in float point representation. 
+.SH SEE ALSO
+none
+.SH BUGS
+No known bugs.
+.SH AUTHOR
+Madeleine Stein

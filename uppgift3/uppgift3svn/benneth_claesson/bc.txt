@@ -1,0 +1,4 @@
+hello svn world!
+Lagt till på rad 2.
+
+Lämnade rad 3 tom.

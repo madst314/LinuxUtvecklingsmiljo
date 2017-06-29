@@ -1,0 +1,16 @@
+Hello svn world
+
+
+kan krocka med ändringar gjorda via folder 
+svn_labb/labb342/mikael_hoeglunds
+
+ändringar gjorda från folder svn_labb/mikael_hoeglund
+som skall checkas in till Umeå repository
+
+
+obs lab3245555 bör det vara 
+då gör vi nytt försök igen
+commit 1
+
+obs lab 324 ska det vara
+commit 2 och trolig konflikt här 

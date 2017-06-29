@@ -1,0 +1,6 @@
+conflict Testfile
+Testfile con
+--
+--
+new_workdir conf
+conflict new_workdir

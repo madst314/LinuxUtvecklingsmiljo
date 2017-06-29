@@ -1,0 +1,8 @@
+Kontroll av SVN		// Udda ändring
+<<<<<<< .mine
+Den andra raden		// Udda ändring
+Den tredje raden	// Jämn ändring
+=======
+Den andra raden
+Den tredje raden	// Jämn ändring
+>>>>>>> .r442

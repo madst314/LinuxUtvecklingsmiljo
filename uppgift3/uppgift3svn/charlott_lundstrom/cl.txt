@@ -1,0 +1,15 @@
+Hello svn world
+en förändring av filen - på olika rader i filen
+nu ändrar jag originalet
+<<<<<<< .mine
+test i original
+=======
+nu förändrar jag från kopian av förrådet
+kopia
+kopia förändring
+test i kopia
+>>>>>>> .r1970
+test i kopia - förändring på en annan rad i filen på kopian
+
+
+dag två av svn

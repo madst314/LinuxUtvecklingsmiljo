@@ -1,0 +1,4 @@
+final row
+diff row orig
+another
+diff row orig

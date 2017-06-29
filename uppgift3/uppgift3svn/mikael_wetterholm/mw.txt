@@ -1,0 +1,6 @@
+min text.
+Jag lägger till lite [ändring från dir1]
+olika rader [ändring 2 från dir1]
+olika rader [ändring 2 från dir2] Hello(dir1) wolrd(dir2)
+i min [ändring från dir2]
+text fil.

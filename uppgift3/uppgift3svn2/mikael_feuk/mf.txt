@@ -1,0 +1,4 @@
+Hello Subversion world, här är jag.
+Detta är ett litet tillägg, visst är det.
+Här är ett tillägg från svntest2+svntest2.
+Från svntest2.

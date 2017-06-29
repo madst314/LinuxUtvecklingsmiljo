@@ -1,0 +1,11 @@
+Min lab4
+Adderar rad ifrån andra stället
+Lägger en rad mellan från första stället
+Lägger en rad under från andra stället
+RAD I MITTEN
+ANNAN RAD I MITTEN
+En till från andra stället
+En till senare från andra
+En sist från första stället
+
+Tom rad och sedan en ny här (sist)

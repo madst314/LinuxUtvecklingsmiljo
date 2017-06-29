@@ -1,0 +1,9 @@
+Hello svn world
+2: Mod==labb4
+1: Mod ln 2
+>>>>>
+<<<<<<< .mine
+<><><>
+4: plus=======
+>>>>>>> .r928
+5: plusplus>>>>>>> .r930
