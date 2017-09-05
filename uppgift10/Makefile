@@ -1,8 +1,8 @@
 CC=gcc
 CFLAGS=-std=c99 -Wall -Wextra -Wpedantic
 FLAGS=-lcunit
-SOURCES=libpower_test.c libresistance_test.c uppgift6/libpower.c uppgift6/libresistance.c
-EXEC_FILE=testprogram
+SOURCES=main_test.c libpower_test.c libresistance_test.c libcomponent_test.c uppgift6/libpower.c uppgift6/libresistance.c uppgift6/libcomponent.c
+EXEC_FILE=test_electro.sh
 
 all: $(EXEC_FILE)
 

@@ -10,6 +10,7 @@
 #include <string.h>
 #include "CUnit/Basic.h"
 
+#include "libresistance_test.h"
 #include "uppgift6/libresistance.h"
 
 /** Function Definitions **/
@@ -29,38 +30,81 @@ void testlibresistance_GIVEN_twoParalellResistances_THEN_returnExpectedResistanc
    const float count = 2;
    const char conn = 'p';
    const float array[2] = {2.0f, 4.0f};
-   const float expectedresistance = 0.75f;
+   const float sum_inverses = (1.f / array[0]) + (1.f / array[1]);
+   const float expectedresistance = 1.f / sum_inverses;
+
+   const float resistance = calc_resistance(count, conn, &array[0]);
+   CU_ASSERT_EQUAL(resistance, expectedresistance);
+}
+
+void testlibresistance_GIVEN_twoSerialResistances_THEN_returnExpectedResistance(void)
+{
+   const float count = 2;
+   const char conn = 's';
+   const float array[2] = {2.0f, 4.0f};
+   const float expectedresistance = 6.f;
 
    const float resistance = calc_resistance(count, conn, &array[0]);
 
    CU_ASSERT_EQUAL(resistance, expectedresistance);
 }
 
-int main()
+void testlibresistance_GIVEN_negativeParallelResistance_THEN_returnErrorVal(void)
 {
-   CU_pSuite libresistanceSuite = NULL;
+   const float count = 2;
+   const char conn = 'p';
+   const float array[2] = {-2.0f, 4.0f};
+   const float expectedresistance = -1.0f;
 
-   /* initialize the CUnit test registry */
-   if (CUE_SUCCESS != CU_initialize_registry())
-      return CU_get_error();
+   const float resistance = calc_resistance(count, conn, &array[0]);
 
-   /* add a suite to the registry */
-   libresistanceSuite = CU_add_suite("libresistance_Suite", init_libresistanceSuite, clean_libresistanceSuite);
-   if (NULL == libresistanceSuite) {
-      CU_cleanup_registry();
-      return CU_get_error();
-   }
+   CU_ASSERT_EQUAL(resistance, expectedresistance);
+}
 
-   /* add the tests to the suite */
-   if ((NULL == CU_add_test(libresistanceSuite, "testlibresistance_GIVEN_current_THEN_returnresistance", testlibresistance_GIVEN_twoParalellResistances_THEN_returnExpectedResistance)))
-   {
-      CU_cleanup_registry();
-      return CU_get_error();
-   }
+void testlibresistance_GIVEN_negativeSerialResistance_THEN_returnErrorVal(void)
+{
+   const float count = 2;
+   const char conn = 's';
+   const float array[2] = {-2.0f, 4.0f};
+   const float expectedresistance = -1.0f;
 
-   /* Run all tests using the CUnit Basic interface */
-   CU_basic_set_mode(CU_BRM_VERBOSE);
-   CU_basic_run_tests();
-   CU_cleanup_registry();
-   return CU_get_error();
+   const float resistance = calc_resistance(count, conn, &array[0]);
+
+   CU_ASSERT_EQUAL(resistance, expectedresistance);
+}
+
+void testlibresistance_GIVEN_emptyResistanceArray_THEN_returnErrorVal(void)
+{
+   const float count = 2;
+   const char conn = 's';
+   const float *array = NULL;
+   const float expectedresistance = -1.0f;
+
+   const float resistance = calc_resistance(count, conn, &array[0]);
+
+   CU_ASSERT_EQUAL(resistance, expectedresistance);
+}
+
+void testlibresistance_GIVEN_invalidCircuitType_THEN_returnErrorVal(void)
+{
+   const float count = 2;
+   const char conn = 'i';
+   const float array[2] = {2.0f, 4.0f};
+   const float expectedresistance = -1.0f;
+
+   const float resistance = calc_resistance(count, conn, &array[0]);
+
+   CU_ASSERT_EQUAL(resistance, expectedresistance);
+}
+
+void testlibresistance_GIVEN_negativeNumResistances_THEN_returnErrorVal(void)
+{
+   const float count = -2;
+   const char conn = 's';
+   const float array[2] = {2.0f, 4.0f};
+   const float expectedresistance = -1.0f;
+
+   const float resistance = calc_resistance(count, conn, &array[0]);
+
+   CU_ASSERT_EQUAL(resistance, expectedresistance);
 }
