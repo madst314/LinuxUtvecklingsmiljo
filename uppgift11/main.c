@@ -1,15 +1,24 @@
+#include <stdlib.h>
 #include <gtk/gtk.h>
-static void enter_callback(GtkWidget *entry)
-{
-   const gchar *voltage;
-   voltage = gtk_entry_get_text(GTK_ENTRY (entry));
-   printf ("Entry contents: %s\n", voltage);
-}
+
+#define UNUSED(x) (void)(x)
+
+typedef struct UserInput {
+   GtkSpinButton *total_voltage;
+   GtkSpinButton *resistance_component1;
+   GtkSpinButton *resistance_component2;
+   GtkSpinButton *resistance_component3;
+} UserInput;
 
 static void compute_callback(GtkWidget *widget, gpointer data)
 {
-   int value1 = gtk_spin_button_get_value(data);
-   printf("value is %d \n", value1);
+   UserInput* user_input = (UserInput*)data;
+   gdouble voltage = gtk_spin_button_get_value(user_input->total_voltage);
+   gdouble resistance1 = gtk_spin_button_get_value(user_input->resistance_component1);
+   gdouble resistance2 = gtk_spin_button_get_value(user_input->resistance_component2);
+   gdouble resistance3 = gtk_spin_button_get_value(user_input->resistance_component3);
+   printf("value is %d \n", voltage);
+   UNUSED(widget);
 }
 
 static void quit_callback()
@@ -64,6 +73,7 @@ int main( int   argc,
    GtkWidget *label_comp3;
    GtkWidget *box = gtk_hbox_new(0,0);
 
+   UserInput *user_input = malloc(4 * sizeof(GtkWidget));
    gtk_init (&argc, &argv);
 
    /* create a new window */
@@ -95,21 +105,24 @@ int main( int   argc,
    label_comp2 = gtk_label_new("Component 2");
    label_comp3 = gtk_label_new("Component 3");
 
-   /* create entry */
+   /* create entries for user input */
    adjust_voltage = gtk_adjustment_new(0, 0, 1000, 1, 1, 10);
    adjust_comp1 = gtk_adjustment_new(0, 0, 1000, 1, 1, 10);
    adjust_comp2 = gtk_adjustment_new(0, 0, 1000, 1, 1, 10);
    adjust_comp3 = gtk_adjustment_new(0, 0, 1000, 1, 1, 10);
+
    entry_voltage = gtk_spin_button_new(GTK_ADJUSTMENT(adjust_voltage), 0.1, 0);
    entry_comp1 = gtk_spin_button_new(GTK_ADJUSTMENT(adjust_comp1), 0.1, 0);
    entry_comp2 = gtk_spin_button_new(GTK_ADJUSTMENT(adjust_comp2), 0.1, 0);
    entry_comp3 = gtk_spin_button_new(GTK_ADJUSTMENT(adjust_comp3), 0.1, 0);
-   g_signal_connect (entry_voltage, "activate",
-                      G_CALLBACK (enter_callback),
-                      entry_voltage);
 
    button_quit = gtk_button_new_with_label ("Quit");
    button_compute = gtk_button_new_with_label ("Compute");
+
+   user_input->total_voltage = (GtkSpinButton*)entry_voltage;
+   user_input->resistance_component1 = (GtkSpinButton*)entry_comp1;
+   user_input->resistance_component2 = (GtkSpinButton*)entry_comp2;
+   user_input->resistance_component3 = (GtkSpinButton*)entry_comp3;
 
    /* When the button receives the "clicked" signal, it will call the
     * callback adn passing it NULL as its argument.
@@ -118,7 +131,7 @@ int main( int   argc,
                      G_CALLBACK (quit_callback), NULL);
    g_signal_connect (button_compute, "clicked",
                      G_CALLBACK(compute_callback),
-                     entry_comp3);
+                     user_input);
 
    /* This will cause the window to be destroyed by calling
     * gtk_widget_destroy(window) when "clicked".
@@ -152,6 +165,8 @@ int main( int   argc,
    gtk_widget_show_all(window);
 
    gtk_main ();
+
+   free(user_input);
 
    return 0;
 }
