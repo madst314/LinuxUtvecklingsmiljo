@@ -1,39 +1,40 @@
 #include <gtk/gtk.h>
-static void enter_callback( GtkWidget *widget,
-                            GtkWidget *entry )
+static void enter_callback(GtkWidget *entry)
 {
-   const gchar *entry_text;
-   entry_text = gtk_entry_get_text (GTK_ENTRY (entry));
-   printf ("Entry contents: %s\n", entry_text);
+   const gchar *voltage;
+   voltage = gtk_entry_get_text(GTK_ENTRY (entry));
+   printf ("Entry contents: %s\n", voltage);
 }
 
-static void quit_callback( GtkWidget *widget,
-                   gpointer   data )
+static void compute_callback(GtkWidget *widget, gpointer data)
+{
+   int value1 = gtk_spin_button_get_value(data);
+   printf("value is %d \n", value1);
+}
+
+static void quit_callback()
 {
    g_print ("You quit the program. Thank you\n");
 }
 
-static gboolean delete_event( GtkWidget *widget,
-                              GdkEvent  *event,
-                              gpointer   data )
+static gboolean delete_event()
 {
    /* If you return FALSE in the "delete-event" signal handler,
-    *      * GTK will emit the "destroy" signal. Returning TRUE means
-    *           * you don't want the window to be destroyed.
-    *                * This is useful for popping up 'are you sure you want to quit?'
-    *                     * type dialogs. */
+    * will emit the "destroy" signal. Returning TRUE means
+    * you don't want the window to be destroyed.
+    * This is useful for popping up 'are you sure you want to quit?'
+    * type dialogs. */
 
    g_print ("delete event occurred\n");
 
    /* Change TRUE to FALSE and the main window will be destroyed with
-    *      * a "delete-event". */
+    *  a "delete-event". */
 
    return TRUE;
 }
 
 /* Another callback */
-static void destroy( GtkWidget *widget,
-                     gpointer   data )
+static void destroy()
 {
    gtk_main_quit ();
 }
@@ -44,7 +45,13 @@ int main( int   argc,
    /* Declaration of widgets */
    GtkWidget *window;
    GtkWidget *button_quit;
+   GtkWidget *button_compute;
    GtkWidget *table;
+
+   GtkObject *adjust_voltage;
+   GtkObject *adjust_comp1;
+   GtkObject *adjust_comp2;
+   GtkObject *adjust_comp3;
 
    GtkWidget *entry_voltage;
    GtkWidget *entry_comp1;
@@ -89,25 +96,29 @@ int main( int   argc,
    label_comp3 = gtk_label_new("Component 3");
 
    /* create entry */
-   entry_voltage = gtk_entry_new();
-   entry_comp1 = gtk_entry_new();
-   entry_comp2 = gtk_entry_new();
-   entry_comp3 = gtk_entry_new();
+   adjust_voltage = gtk_adjustment_new(0, 0, 1000, 1, 1, 10);
+   adjust_comp1 = gtk_adjustment_new(0, 0, 1000, 1, 1, 10);
+   adjust_comp2 = gtk_adjustment_new(0, 0, 1000, 1, 1, 10);
+   adjust_comp3 = gtk_adjustment_new(0, 0, 1000, 1, 1, 10);
+   entry_voltage = gtk_spin_button_new(GTK_ADJUSTMENT(adjust_voltage), 0.1, 0);
+   entry_comp1 = gtk_spin_button_new(GTK_ADJUSTMENT(adjust_comp1), 0.1, 0);
+   entry_comp2 = gtk_spin_button_new(GTK_ADJUSTMENT(adjust_comp2), 0.1, 0);
+   entry_comp3 = gtk_spin_button_new(GTK_ADJUSTMENT(adjust_comp3), 0.1, 0);
    g_signal_connect (entry_voltage, "activate",
                       G_CALLBACK (enter_callback),
                       entry_voltage);
-   gtk_entry_set_text(GTK_ENTRY(entry_voltage), "voltage");
-   gtk_entry_set_text(GTK_ENTRY(entry_comp1), "resistance in Ohm");
-   gtk_entry_set_text(GTK_ENTRY(entry_comp2), "resistance in Ohm");
-   gtk_entry_set_text(GTK_ENTRY(entry_comp3), "resistance in Ohm");
 
    button_quit = gtk_button_new_with_label ("Quit");
+   button_compute = gtk_button_new_with_label ("Compute");
 
    /* When the button receives the "clicked" signal, it will call the
     * callback adn passing it NULL as its argument.
     */
    g_signal_connect (button_quit, "clicked",
                      G_CALLBACK (quit_callback), NULL);
+   g_signal_connect (button_compute, "clicked",
+                     G_CALLBACK(compute_callback),
+                     entry_comp3);
 
    /* This will cause the window to be destroyed by calling
     * gtk_widget_destroy(window) when "clicked".
@@ -128,6 +139,7 @@ int main( int   argc,
    gtk_table_attach(GTK_TABLE(table), entry_comp3, 1, 2, 3, 4, GTK_FILL | GTK_SHRINK, GTK_FILL | GTK_SHRINK,5, 5);
 
    gtk_table_attach(GTK_TABLE(table), button_quit, 2, 3, 0, 1, GTK_FILL | GTK_SHRINK, GTK_FILL | GTK_SHRINK,5, 5);
+   gtk_table_attach(GTK_TABLE(table), button_compute, 2, 3, 1, 2, GTK_FILL | GTK_SHRINK, GTK_FILL | GTK_SHRINK,5, 5);
 
    /* Add box to window and table to box */
    gtk_container_add(GTK_CONTAINER(window), box);
