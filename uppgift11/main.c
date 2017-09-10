@@ -1,23 +1,69 @@
 #include <stdlib.h>
 #include <gtk/gtk.h>
 
+#include "libcomponent.h"
+#include "libresistance.h"
+#include "libpower.h"
+
 #define UNUSED(x) (void)(x)
 
 typedef struct UserInput {
-   GtkSpinButton *total_voltage;
-   GtkSpinButton *resistance_component1;
-   GtkSpinButton *resistance_component2;
-   GtkSpinButton *resistance_component3;
+   GtkSpinButton *gtk_spin_buttons[4];
+   GtkToggleButton *button_parallel;
+   GtkTextBuffer *buffer;
 } UserInput;
 
 static void compute_callback(GtkWidget *widget, gpointer data)
 {
+   float resistances[3] = {0};
+   float e12_resistances[3] = {0};
+   int numComponents = 0;
+   int num_e12 = 0;
+   char circuitType = 'p';
+   float total_resistance = 0.f;
+   float power = 0;
+   int idx;
+
    UserInput* user_input = (UserInput*)data;
-   gdouble voltage = gtk_spin_button_get_value(user_input->total_voltage);
-   gdouble resistance1 = gtk_spin_button_get_value(user_input->resistance_component1);
-   gdouble resistance2 = gtk_spin_button_get_value(user_input->resistance_component2);
-   gdouble resistance3 = gtk_spin_button_get_value(user_input->resistance_component3);
-   printf("value is %d \n", voltage);
+   const gdouble voltage = gtk_spin_button_get_value(user_input->gtk_spin_buttons[0]);
+   const gboolean isParallel =  gtk_toggle_button_get_active(user_input->button_parallel);
+
+   /* set circuit type */
+   if (!isParallel)
+   {
+      circuitType = 's';
+   }
+
+   /* get num of components and their resistances*/
+   for (idx = 0; idx < 3; idx++)
+   {
+      const float resistance = gtk_spin_button_get_value(user_input->gtk_spin_buttons[idx + 1]);
+      if (resistance > 0)
+      {
+         resistances[numComponents] = resistance;
+         numComponents++;
+      }
+   }
+
+   if (numComponents!=0)
+   {
+      /* calculate resulting resistance */
+      total_resistance = calc_resistance(numComponents, circuitType, &resistances[0]);
+
+      /* calculate power */
+      power = calc_power_r(voltage, total_resistance);
+
+      /* calculate E12 resistances */
+      num_e12 = e_resistance(total_resistance, &e12_resistances[0]);
+   }
+
+   gtk_text_buffer_set_text (user_input->buffer, "Hello, this is some text", -1);
+   printf("Components are: %f, %f, %f \n", resistances[0], resistances[1], resistances[2]);
+   printf("Number of components: %d \n", numComponents);
+   printf ("calculated res is %f\n", total_resistance);
+   printf("POwer is %f \n", power);
+
+   printf("E12 %d %f, %f, %f \n", num_e12, e12_resistances[0], e12_resistances[1], e12_resistances[2]);
    UNUSED(widget);
 }
 
@@ -28,18 +74,7 @@ static void quit_callback()
 
 static gboolean delete_event()
 {
-   /* If you return FALSE in the "delete-event" signal handler,
-    * will emit the "destroy" signal. Returning TRUE means
-    * you don't want the window to be destroyed.
-    * This is useful for popping up 'are you sure you want to quit?'
-    * type dialogs. */
-
-   g_print ("delete event occurred\n");
-
-   /* Change TRUE to FALSE and the main window will be destroyed with
-    *  a "delete-event". */
-
-   return TRUE;
+   return FALSE;
 }
 
 /* Another callback */
@@ -55,6 +90,8 @@ int main( int   argc,
    GtkWidget *window;
    GtkWidget *button_quit;
    GtkWidget *button_compute;
+   GtkWidget *button_parallel;
+   GtkWidget *button_serial;
    GtkWidget *table;
 
    GtkObject *adjust_voltage;
@@ -73,12 +110,15 @@ int main( int   argc,
    GtkWidget *label_comp3;
    GtkWidget *box = gtk_hbox_new(0,0);
 
-   UserInput *user_input = malloc(4 * sizeof(GtkWidget));
+   GtkWidget *view;
+   GtkTextBuffer *buffer;
+
+   UserInput *user_input = malloc(sizeof(UserInput));
    gtk_init (&argc, &argv);
 
    /* create a new window */
    window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-   gtk_widget_set_size_request (GTK_WIDGET (window), 1000, 500);
+   gtk_widget_set_size_request (GTK_WIDGET (window), 700, 500);
    gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
    gtk_container_set_border_width (GTK_CONTAINER (window), 10);
 
@@ -97,7 +137,7 @@ int main( int   argc,
                      G_CALLBACK (destroy), NULL);
 
    /* create table */
-   table = gtk_table_new(5, 3, TRUE);
+   table = gtk_table_new(6, 4, TRUE);
 
    /* crate labels */
    label_voltage = gtk_label_new("Total Voltage");
@@ -111,21 +151,44 @@ int main( int   argc,
    adjust_comp2 = gtk_adjustment_new(0, 0, 1000, 1, 1, 10);
    adjust_comp3 = gtk_adjustment_new(0, 0, 1000, 1, 1, 10);
 
+   /* Entries for voltage and resistances */
    entry_voltage = gtk_spin_button_new(GTK_ADJUSTMENT(adjust_voltage), 0.1, 0);
    entry_comp1 = gtk_spin_button_new(GTK_ADJUSTMENT(adjust_comp1), 0.1, 0);
    entry_comp2 = gtk_spin_button_new(GTK_ADJUSTMENT(adjust_comp2), 0.1, 0);
    entry_comp3 = gtk_spin_button_new(GTK_ADJUSTMENT(adjust_comp3), 0.1, 0);
+   gtk_spin_button_set_digits ((GtkSpinButton*)entry_voltage, 1);
+   gtk_spin_button_set_digits ((GtkSpinButton*)entry_comp1, 1);
+   gtk_spin_button_set_digits ((GtkSpinButton*)entry_comp2, 1);
+   gtk_spin_button_set_digits ((GtkSpinButton*)entry_comp3, 1);
 
+   /* Buttons */
    button_quit = gtk_button_new_with_label ("Quit");
    button_compute = gtk_button_new_with_label ("Compute");
 
-   user_input->total_voltage = (GtkSpinButton*)entry_voltage;
-   user_input->resistance_component1 = (GtkSpinButton*)entry_comp1;
-   user_input->resistance_component2 = (GtkSpinButton*)entry_comp2;
-   user_input->resistance_component3 = (GtkSpinButton*)entry_comp3;
+   /* Radio Buttons */
+   button_parallel =
+      gtk_radio_button_new_with_label_from_widget(
+         NULL, "parallel");
+   button_serial =
+      gtk_radio_button_new_with_label_from_widget(
+         GTK_RADIO_BUTTON(button_parallel), "serial");
+   gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(button_parallel), TRUE);
+
+   /* Set up output text window */
+   view = gtk_text_view_new ();
+   buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
+
+
+   /* set UserInput struct */
+   user_input->gtk_spin_buttons[0] = (GtkSpinButton*)entry_voltage;
+   user_input->gtk_spin_buttons[1] = (GtkSpinButton*)entry_comp1;
+   user_input->gtk_spin_buttons[2] = (GtkSpinButton*)entry_comp2;
+   user_input->gtk_spin_buttons[3] = (GtkSpinButton*)entry_comp3;
+   user_input->button_parallel = GTK_TOGGLE_BUTTON(button_parallel);
+   user_input->buffer = buffer;
 
    /* When the button receives the "clicked" signal, it will call the
-    * callback adn passing it NULL as its argument.
+    * callback and passing it NULL as its argument.
     */
    g_signal_connect (button_quit, "clicked",
                      G_CALLBACK (quit_callback), NULL);
@@ -153,15 +216,15 @@ int main( int   argc,
 
    gtk_table_attach(GTK_TABLE(table), button_quit, 2, 3, 0, 1, GTK_FILL | GTK_SHRINK, GTK_FILL | GTK_SHRINK,5, 5);
    gtk_table_attach(GTK_TABLE(table), button_compute, 2, 3, 1, 2, GTK_FILL | GTK_SHRINK, GTK_FILL | GTK_SHRINK,5, 5);
+   gtk_table_attach(GTK_TABLE(table), button_parallel, 0, 1, 4, 5, GTK_FILL | GTK_SHRINK, GTK_FILL | GTK_SHRINK,5, 5);
+   gtk_table_attach(GTK_TABLE(table), button_serial, 1, 2, 4, 5, GTK_FILL | GTK_SHRINK, GTK_FILL | GTK_SHRINK,5, 5);
+   gtk_table_attach(GTK_TABLE(table), view, 2, 4, 2, 6, GTK_FILL | GTK_SHRINK, GTK_FILL | GTK_SHRINK,5, 5);
 
    /* Add box to window and table to box */
    gtk_container_add(GTK_CONTAINER(window), box);
    gtk_container_add (GTK_CONTAINER (box), table);
 
    /* Display widgets. */
-   //gtk_widget_show (button_quit);
-   //gtk_widget_show (window);
-   //gtk_widget_show (entry_voltage);
    gtk_widget_show_all(window);
 
    gtk_main ();
