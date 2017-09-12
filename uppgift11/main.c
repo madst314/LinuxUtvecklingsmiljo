@@ -68,6 +68,7 @@ static void compute_callback(GtkWidget *widget, gpointer data)
                                      e12_resistances[2]);
 
    gtk_text_buffer_set_text (user_input->buffer, buffer, -1);
+
    UNUSED(widget);
 }
 
@@ -181,7 +182,6 @@ int main( int   argc,
    /* Set up output text window */
    view = gtk_text_view_new ();
    buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
-
 
    /* set UserInput struct */
    user_input->gtk_spin_buttons[0] = (GtkSpinButton*)entry_voltage;
