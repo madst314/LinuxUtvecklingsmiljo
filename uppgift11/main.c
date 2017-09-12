@@ -21,7 +21,7 @@ static void compute_callback(GtkWidget *widget, gpointer data)
    int num_e12 = 0;
    char circuitType = 'p';
    float total_resistance = 0.f;
-   float power = 0;
+   float power = 0.f;
    int idx;
 
    UserInput* user_input = (UserInput*)data;
@@ -57,13 +57,17 @@ static void compute_callback(GtkWidget *widget, gpointer data)
       num_e12 = e_resistance(total_resistance, &e12_resistances[0]);
    }
 
-   gtk_text_buffer_set_text (user_input->buffer, "Hello, this is some text", -1);
-   printf("Components are: %f, %f, %f \n", resistances[0], resistances[1], resistances[2]);
-   printf("Number of components: %d \n", numComponents);
-   printf ("calculated res is %f\n", total_resistance);
-   printf("POwer is %f \n", power);
+   char buffer[1024];
+   snprintf(buffer, sizeof(buffer), "The number of resistances are: %d \n"
+                                     "The resulting resistances are: %.1f Ohm\n"
+                                     "The power is: %.1f Watt \n"
+                                     "The number of E12 resistors is: %d \n"
+                                     "E12 rersistors are: %.1f, %.1f, %.1f Ohm \n",
+                                     numComponents, total_resistance, power,
+                                     num_e12, e12_resistances[0], e12_resistances[1],
+                                     e12_resistances[2]);
 
-   printf("E12 %d %f, %f, %f \n", num_e12, e12_resistances[0], e12_resistances[1], e12_resistances[2]);
+   gtk_text_buffer_set_text (user_input->buffer, buffer, -1);
    UNUSED(widget);
 }
 
@@ -118,7 +122,7 @@ int main( int   argc,
 
    /* create a new window */
    window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-   gtk_widget_set_size_request (GTK_WIDGET (window), 700, 500);
+   gtk_widget_set_size_request (GTK_WIDGET (window), 800, 500);
    gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
    gtk_container_set_border_width (GTK_CONTAINER (window), 10);
 
@@ -146,10 +150,10 @@ int main( int   argc,
    label_comp3 = gtk_label_new("Component 3");
 
    /* create entries for user input */
-   adjust_voltage = gtk_adjustment_new(0, 0, 1000, 1, 1, 10);
-   adjust_comp1 = gtk_adjustment_new(0, 0, 1000, 1, 1, 10);
-   adjust_comp2 = gtk_adjustment_new(0, 0, 1000, 1, 1, 10);
-   adjust_comp3 = gtk_adjustment_new(0, 0, 1000, 1, 1, 10);
+   adjust_voltage = gtk_adjustment_new(0, 0, 10000, 1, 1, 10);
+   adjust_comp1 = gtk_adjustment_new(0, 0, 10000, 1, 1, 10);
+   adjust_comp2 = gtk_adjustment_new(0, 0, 10000, 1, 1, 10);
+   adjust_comp3 = gtk_adjustment_new(0, 0, 10000, 1, 1, 10);
 
    /* Entries for voltage and resistances */
    entry_voltage = gtk_spin_button_new(GTK_ADJUSTMENT(adjust_voltage), 0.1, 0);
