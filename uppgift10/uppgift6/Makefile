@@ -33,8 +33,8 @@ clean:
 	rm -rf $(LIB)
 
 install: $(EXEC_FILE)
-	install -m 0755 $(EXEC_FILE) $(INSTALL_PATH)/bin
-	install -m 0755 $(SOBJS) $(INSTALL_PATH)/lib
+	install -m 0755 $(EXEC_FILE) /usr/bin
+	install -m 0755 $(SOBJS) /usr/lib
 
 uninstall:
 	rm -f $(INSTALL_PATH)/bin/$(EXEC_FILE)
