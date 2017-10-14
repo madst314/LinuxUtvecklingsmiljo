@@ -1,0 +1,56 @@
+Madeleine Stein 2017-10-12
+Inlämningsuppgift 12
+
+INLEDNING
+Uppgiften gick ut på att lära känna Eclipse verktyg för debugging och utveckling. Samt lära sig hur man sätter upp en utvecklingsmiljö i Eclipse. Man skulle använda ett egenskrivet bibliotek tillsammans med en gtk application. Ett tredjeparts testbibliotek (med buggar i) skulle användas och man skulle med hjälp av Eclipse debugga tredjeparts testbiblioteket så att alla tester gick igenom. 
+
+-----METOD----
+Instalation och konfiguration
+Först installerades gnome-core-devel, pkg-config samt build-essential med verktyget apt-get
+
+> sudo apt-get install gnome-core-devel
+
+> sudo apt-get install build-essential pkg-config
+
+Sedan installerades stöd för gtk (om det inte redan fanns)
+
+> sudo apt-get install libgtk2.0-dev
+
+> sudo apt-get install libgtk2.0
+
+Sedan installerades Eclipse genom apt-get
+
+> sudo apt-get install eclipse eclipse-cdt g++ pkg-config
+
+Sedan skapade man ett project i Eclipse med applicationen från föregående uppgift (upgift 11). Viktigt hör var att lägga till sökvägar till det egna biblioteket som gjordes genom att skapa ett eget arkiv med kommandot ar genom, 
+
+>ar cr liblinum.a power.o component.o resistance.o
+
+libnum.a lades sedan under /usr/lib
+
+och respektive h-fil till biblioteken under /usr/include/linum. 
+Sedan var det viktigt att lägga till dessa biblioteks sökvägar i Eclipse. 
+Även stöd för gtk vid kompilering behövdes läggas till genom att lägga till GTK+-FLAGS och GTK+-LIBS flaggorna under build variables. 
+
+Sedan debuggades koden genom högerklicka på projektmappen i browsern -> debug as -> C/C++ application. Då startas debug-miljön och man kan sätta break-point på lämoliga ställen i koden. Debuggern startas sedan genom run-menyn eller kort-knappar i tool-baren. Man kan sedan steppa igenom koden och se värden på variablerna. 
+
+Jag valde att sätta en break-point i testbibioteket och se när variabeln btk blev falsk. Köra om och steppa in i funktionen som gick fel och på så sätt hitta buggarna.
+ 
+RESULTAT
+Resultatet visade att det fanns två buggar. 
+
+1) #define calc_resistans calc_resistance. Var bakvänd vilket gjorde att applicationen inte kompilerade då kompilarorn inte hittade calc_resistans. 
+
+2) TestComponentFunction så var det andra tester felkonstruerat. Resultatet borde vara en 100 ohms resistans medan testet sade att det skulle vara två stycken resistanser. 
+
+DISKUSSION
+
+
+SLUTORD
+
+    Diskussion - I diskussionsdelen diskuterar du de resultat du fick.
+    Slutord / reflektion -Under rubriken skriver du ner några kommentarer och reflektioner du hade i labben.
+
+    Referenser -  Numrerad lista med källreferenser. Tänk på att ange datum för access för internetlänkar.
+
+
