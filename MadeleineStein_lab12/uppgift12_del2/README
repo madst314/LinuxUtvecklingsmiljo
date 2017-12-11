@@ -1,0 +1,57 @@
+Madeleine Stein 2017-10-12
+Inlämningsuppgift 12
+
+INLEDNING
+Uppgiften gick ut på att lära känna Eclipse verktyg för debugging och utveckling. Samt lära sig hur man sätter upp en utvecklingsmiljö i Eclipse. Man skulle använda ett egenskrivet bibliotek tillsammans med en gtk application. Ett tredjeparts testbibliotek (med buggar i) skulle användas och man skulle med hjälp av Eclipse debugga tredjeparts testbiblioteket så att alla tester gick igenom. 
+
+-----METOD----
+Instalation och konfiguration
+Först installerades gnome-core-devel, pkg-config samt build-essential med verktyget apt-get
+
+> sudo apt-get install gnome-core-devel
+
+> sudo apt-get install build-essential pkg-config
+
+Sedan installerades stöd för gtk (om det inte redan fanns)
+
+> sudo apt-get install libgtk2.0-dev
+
+> sudo apt-get install libgtk2.0
+
+Sedan installerades Eclipse genom apt-get
+
+> sudo apt-get install eclipse eclipse-cdt g++ pkg-config
+
+Sedan skapade man ett C project i Eclipse med applicationen från föregående uppgift (upgift 11) för uppgift 1 och ett C++ projekt för uppgift2 (fraktaker). Viktigt här var att i del 1 lägga till sökvägar till det egna biblioteket som gjordes genom att skapa ett eget arkiv med kommandot ar genom, 
+
+>ar cr liblinum.a power.o component.o resistance.o
+
+libnum.a lades sedan under /usr/lib
+
+och respektive h-fil till biblioteken under /usr/include/linum. 
+Sedan var det viktigt att lägga till dessa biblioteks sökvägar i Eclipse. 
+Även stöd för gtk vid kompilering behövdes läggas till genom att lägga till GTK+-FLAGS och GTK+-LIBS flaggorna under build variables. Och sökvägar till h-filerna under /usr/include/gtk-2.0 och /usr/include/glib.
+
+Sedan debuggades koden genom högerklicka på projektmappen i browsern -> debug as -> C/C++ application. Då startas debug-miljön och man kan sätta break-point på lämoliga ställen i koden. Debuggern startas sedan genom run-menyn eller kort-knappar i tool-baren. Man kan sedan steppa igenom koden och se värden på variablerna. 
+
+För uppgift 1 valde jag att sätta en break-point i testbibioteket och se när variabeln btk blev falsk. Köra om och steppa in i funktionen som gick fel och på så sätt hitta buggarna.
+
+För uppgift 2 valde jag att utöka click-event callbakc-funktionen för att få ut muspekarens koordinater, räkna om dem till en imaginär centerpunkt, beräkna om fraktalen och rita den i samma förnster som innan. 
+ 
+RESULTAT
+För uppgft 1 visade att det fanns två buggar. 
+
+1) #define calc_resistans calc_resistance. Var bakvänd vilket gjorde att applicationen inte kompilerade då kompilarorn inte hittade calc_resistans. 
+
+2) TestComponentFunction så var det andra tester felkonstruerat. Resultatet borde vara en 100 ohms resistans medan testet sade att det skulle vara två stycken resistanser. 
+
+För uppgift 2 så tog det mellan 4-5 sekunder att beräkna fraktalen. Om man instället lade till en optimeringsflagga (-O1) vid kompilering så tog det 1-2 sekunder.   
+
+DISKUSSION OCH SLUTORD
+Mycket av labben handlade för mig om att få upp en fungerande miljö i Eclipse. FÖr uppgift 2 gjorde jag först misstaget att skapa ett C projekt innan jag insåg att det var ett C++ projekt jag skulle skapat istället. För uppgift 1 tog det mig lång tid att få till includeringen av mitt egna bibliotek (missade hjälpavsnittet). 
+
+Till uppgift 2 läste jag istället noga igenom alla stegen och kickade mig egenom relevanta frågor på forumet innan jag började. Kul och nyttig labb. Intressant att se hur bra kompilatorn är på att optimera koden själv. 
+
+
+
+
