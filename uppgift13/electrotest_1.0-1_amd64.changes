@@ -1,0 +1,31 @@
+Format: 1.8
+Date: Mon, 11 Dec 2017 18:13:35 +0100
+Source: electrotest
+Binary: electrotest
+Architecture: source amd64
+Version: 1.0-1
+Distribution: unstable
+Urgency: medium
+Maintainer: Madeleine <madeleine@unknown>
+Changed-By: Madeleine <madeleine@unknown>
+Description:
+ electrotest - <insert up to 60 chars description>
+Changes:
+ electrotest (1.0-1) unstable; urgency=medium
+ .
+   * Initial release (Closes: #nnnn)  <nnnn is the bug number of your ITP>
+Checksums-Sha1:
+ 1a61eeee05d2b760af9db25bfde37f65741f9487 833 electrotest_1.0-1.dsc
+ 9774b3434fbcb6b670f7241f6979c31282db1a26 1628 electrotest_1.0.orig.tar.xz
+ 3ff7c1ee2044574ccdd76a853c17a5c08c1f3e3e 8232 electrotest_1.0-1.debian.tar.xz
+ b1c8ee950119857ff0bb66d4141ce99461445a88 2184 electrotest_1.0-1_amd64.deb
+Checksums-Sha256:
+ 2d6244f73a92a5b8c4265265e789bb46d37104bb4109454da43d254b1f245495 833 electrotest_1.0-1.dsc
+ c6f236ba15389e535208e888d2ad8c545d64b5ebc1472d827f6a53ce1a518c29 1628 electrotest_1.0.orig.tar.xz
+ ae733be9cac4d6681c8e3a302f20372a1c5c20e7154309de42070786f035d288 8232 electrotest_1.0-1.debian.tar.xz
+ 18f6c2a3ed266f9410fe5b5dad4b4a0d66506518adeaadb9ffdd85ad345c0de1 2184 electrotest_1.0-1_amd64.deb
+Files:
+ ce0c558ffdea370ff0cd2a62f2861e68 833 unknown optional electrotest_1.0-1.dsc
+ 2e56ad70b4fce276c3d2686a433d27bf 1628 unknown optional electrotest_1.0.orig.tar.xz
+ a45c354c7c5af2beaa2c2b7fd182a6c8 8232 unknown optional electrotest_1.0-1.debian.tar.xz
+ 9bacc93e889fb76acc3fd85200d38b49 2184 unknown optional electrotest_1.0-1_amd64.deb

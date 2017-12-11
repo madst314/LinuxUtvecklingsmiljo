@@ -1,0 +1,5 @@
+electrotest (1.0-1) unstable; urgency=medium
+
+  * Initial release (Closes: #nnnn)  <nnnn is the bug number of your ITP>
+
+ -- Madeleine <madeleine@unknown>  Mon, 11 Dec 2017 18:13:35 +0100

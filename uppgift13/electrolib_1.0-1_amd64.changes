@@ -1,0 +1,35 @@
+Format: 1.8
+Date: Mon, 11 Dec 2017 18:00:04 +0100
+Source: electrolib
+Binary: electrolib-dev electrolib1
+Architecture: source amd64
+Version: 1.0-1
+Distribution: unstable
+Urgency: medium
+Maintainer: Madeleine <madeleine@unknown>
+Changed-By: Madeleine <madeleine@unknown>
+Description:
+ electrolib-dev - <insert up to 60 chars description>
+ electrolib1 - <insert up to 60 chars description>
+Changes:
+ electrolib (1.0-1) unstable; urgency=medium
+ .
+   * Initial release (Closes: #nnnn)  <nnnn is the bug number of your ITP>
+Checksums-Sha1:
+ 38925bd553fa3f1eba70e456898980a9e9ea541e 886 electrolib_1.0-1.dsc
+ a4c2b56bc663600ae7c87fd0914c3f84134b88c0 6360 electrolib_1.0.orig.tar.xz
+ b91b183afc6983b2850de77d6f346c6d4a90d13c 8420 electrolib_1.0-1.debian.tar.xz
+ 98d8de4f823f56e6a3e7a6172aac1d65faf2a0fc 5564 electrolib-dev_1.0-1_amd64.deb
+ 0b88d809613417a07f208f75eec595083c165fe7 5426 electrolib1_1.0-1_amd64.deb
+Checksums-Sha256:
+ 7eb7cd65345f443ab07728996d1bb88afa43ca2925238bdf2bc7b991c682f480 886 electrolib_1.0-1.dsc
+ 1685375f04e8c2fc9690b0fcd0fc83e2ec62511990a09db91c0da8389829d09e 6360 electrolib_1.0.orig.tar.xz
+ 0c32e27eae1b5393087f4acc8ef94c75f5ef23aefad997c2e3b9194e730282a7 8420 electrolib_1.0-1.debian.tar.xz
+ 2a23235204da23aa1f292f6219a9fe16eb356cb8f0fed51d178882fc44998ef7 5564 electrolib-dev_1.0-1_amd64.deb
+ bf35d9d2bbd2ca65c8807af6f9b8c3614273c6e73a20d2c41152a40493d1eec2 5426 electrolib1_1.0-1_amd64.deb
+Files:
+ 4ce8fcc498d70afe88570410cfd9c686 886 libs optional electrolib_1.0-1.dsc
+ 168f5ee0593b3aa76e51708acac9ec11 6360 libs optional electrolib_1.0.orig.tar.xz
+ 780eb751d6607a4fd1e6eef9181a25a1 8420 libs optional electrolib_1.0-1.debian.tar.xz
+ 839a96e10e79062abdb5a2678ddb944a 5564 libdevel optional electrolib-dev_1.0-1_amd64.deb
+ 7d230243b2d239f8fd2f46c25a886fe5 5426 libs optional electrolib1_1.0-1_amd64.deb

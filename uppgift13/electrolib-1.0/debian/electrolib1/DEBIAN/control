@@ -1,0 +1,12 @@
+Package: electrolib1
+Source: electrolib
+Version: 1.0-1
+Architecture: amd64
+Maintainer: Madeleine <madeleine@unknown>
+Installed-Size: 32
+Depends: libc6 (>= 2.2.5)
+Section: libs
+Priority: optional
+Homepage: <insert the upstream URL, if relevant>
+Description: <insert up to 60 chars description>
+ <insert long description, indented with spaces>

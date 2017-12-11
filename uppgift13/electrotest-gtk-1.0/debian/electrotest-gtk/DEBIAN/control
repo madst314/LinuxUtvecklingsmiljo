@@ -1,0 +1,11 @@
+Package: electrotest-gtk
+Version: 1.0-1
+Architecture: amd64
+Maintainer: Madeleine <madeleine@unknown>
+Installed-Size: 10
+Depends: electrolib1 (>= 1.0), build-essential, gnome-devel, libgnomeui-dev
+Section: unknown
+Priority: optional
+Homepage: <insert the upstream URL, if relevant>
+Description: <insert up to 60 chars description>
+ <insert long description, indented with spaces>
